@@ -1,0 +1,12 @@
+version: '2'
+services:
+    wilkestechdemo-postgresql:
+        container_name: wilkestechdemo-postgresql
+        image: postgres:9.5.3
+        # volumes:
+        #     - ~/volumes/jhipster/wilkestechDemo/postgresql/:/var/lib/postgresql/
+        environment:
+            - POSTGRES_USER=wilkestechDemo
+            - POSTGRES_PASSWORD=
+        ports:
+            - 5432:5432

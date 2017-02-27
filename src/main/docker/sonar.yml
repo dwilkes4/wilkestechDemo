@@ -1,0 +1,8 @@
+version: '2'
+services:
+    wilkestechdemo-sonar:
+        container_name: wilkestechdemo-sonar
+        image: sonarqube:5.6-alpine
+        ports:
+            - 9000:9000
+            - 9092:9092

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <!--
+        Added the constraints for entity Property.
+    -->
+    <changeSet id="20170227055159-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="renter_id"
+                                 baseTableName="property"
+                                 constraintName="fk_property_renter_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="renter"/>
+
+        <addForeignKeyConstraint baseColumnNames="address_id"
+                                 baseTableName="property"
+                                 constraintName="fk_property_address_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="address"/>
+
+        <addForeignKeyConstraint baseColumnNames="owner_id"
+                                 baseTableName="property"
+                                 constraintName="fk_property_owner_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="renter"/>
+
+    </changeSet>
+</databaseChangeLog>

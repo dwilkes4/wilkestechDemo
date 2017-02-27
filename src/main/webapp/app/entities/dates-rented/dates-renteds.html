@@ -1,0 +1,76 @@
+<div>
+    <h2>Dates Renteds</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="dates-rented.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span >
+                        Create new Dates Rented
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span>ID</span></th>
+                    <th><span>Price</span></th>
+                    <th><span>Start Date</span></th>
+                    <th><span>End Date</span></th>
+                    <th><span>Rentee</span></th>
+                    <th><span>Property</span></th>
+                    <th><span>Property</span></th>
+                    <th><span>Rentee</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="datesRented in vm.datesRenteds track by datesRented.id">
+                    <td><a ui-sref="dates-rented-detail({id:datesRented.id})">{{datesRented.id}}</a></td>
+                    <td>{{datesRented.price}}</td>
+                        <td>{{datesRented.startDate | date:'mediumDate'}}</td>
+                        <td>{{datesRented.endDate | date:'mediumDate'}}</td>
+                    <td>
+                        <a ui-sref="rentee-detail({id:datesRented.renteeId})">{{datesRented.renteeId}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="property-detail({id:datesRented.propertyId})">{{datesRented.propertyId}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="property-detail({id:datesRented.propertyId})">{{datesRented.propertyId}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="rentee-detail({id:datesRented.renteeId})">{{datesRented.renteeId}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="dates-rented-detail({id:datesRented.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="dates-rented.edit({id:datesRented.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="dates-rented.delete({id:datesRented.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

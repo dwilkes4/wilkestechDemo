@@ -1,0 +1,35 @@
+
+<div>
+    <h2><span>Property</span> {{vm.property.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Property Name</span></dt>
+        <dd>
+            <span>{{vm.property.propertyName}}</span>
+        </dd>
+        <dt><span>Renter</span></dt>
+        <dd>
+            <a ui-sref="renter-detail({id:vm.property.renterId})">{{vm.property.renterId}}</a>
+        </dd>
+        <dt><span>Address</span></dt>
+        <dd>
+            <a ui-sref="address-detail({id:vm.property.addressId})">{{vm.property.addressId}}</a>
+        </dd>
+        <dt><span>Owner</span></dt>
+        <dd>
+            <a ui-sref="renter-detail({id:vm.property.ownerId})">{{vm.property.ownerId}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="property-detail.edit({id:vm.property.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm"> Edit</span>
+    </button>
+</div>

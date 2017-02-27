@@ -1,0 +1,56 @@
+
+entity Renter {
+	firstName String,
+	lastName String,
+	email String,
+	phoneNumber String,
+    password String
+}
+
+entity Rentee {
+	firstName String,
+	lastName String,
+	email String,
+	phoneNumber String,
+    password String
+}
+
+entity Property {
+	propertyName String,
+}
+
+entity Address {
+	streetAddress String,
+	postalCode String,
+	city String,
+	stateProvince String
+}
+
+entity DatesRented {
+	price Long,
+    startDate LocalDate,
+    endDate LocalDate
+}
+
+entity DayPrice {
+	startDate LocalDate,
+    endDate LocalDate,
+    priceOfDay Long
+}
+
+relationship ManyToOne {
+	Property{owner} to Renter,
+    DatesRented{property} to Property,
+    DatesRented{rentee} to Rentee,
+    DayPrice{property} to Property
+}
+
+relationship OneToOne {
+	Property{address} to Address
+}
+
+dto * with mapstruct
+
+service all with serviceImpl
+// Set an angular suffix
+angularSuffix * with mySuffix
