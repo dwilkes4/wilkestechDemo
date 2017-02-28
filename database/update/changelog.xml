@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+	<include file="2017-02/2017-02-27-01-create-table-renter.xml" relativeToChangelogFile="true"/>
+	<include file="2017-02/2017-02-27-02-create-table-address.xml" relativeToChangelogFile="true"/>
+	<include file="2017-02/2017-02-27-03-create-table-property.xml" relativeToChangelogFile="true"/>
+	<include file="2017-02/2017-02-27-04-create-table-rentee.xml" relativeToChangelogFile="true"/>
+	<include file="2017-02/2017-02-27-05-create-table-day_price.xml" relativeToChangelogFile="true"/>
+	<include file="2017-02/2017-02-27-06-create-table-dates-rented.xml" relativeToChangelogFile="true"/>
+</databaseChangeLog>

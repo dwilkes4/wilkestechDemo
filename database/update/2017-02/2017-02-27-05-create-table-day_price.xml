@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+	<changeSet id="Setup" author="Daniel T Wilkes">
+		<sql>
+			CREATE TABLE IF NOT EXISTS ${database.defaultSchemaName}.day_price
+				(
+					id serial NOT NULL,
+					property_id serial NOT NULL,
+					priceOfDay BIGINT,
+					startDate TIMESTAMP,
+    				endDate TIMESTAMP,
+					CONSTRAINT day_price_property_fk FOREIGN KEY (property_id) references ${database.defaultSchemaName}.property(id),
+   					CONSTRAINT day_price_property_pk PRIMARY KEY (id)
+				) WITH (
+					OIDS=FALSE
+				)
+		</sql>
+		<rollback>
+			DROP TABLE IF EXISTS ${database.defaultSchemaName}.day_price
+		</rollback>
+	</changeSet>	
+</databaseChangeLog>

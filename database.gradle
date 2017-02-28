@@ -1,0 +1,60 @@
+import org.apache.tools.ant.taskdefs.condition.Os
+
+configurations {
+	liquibaseConfig
+}
+
+dependencies {
+	liquibaseConfig ('org.postgresql:postgresql:9.4-1201-jdbc4')
+	liquibaseConfig ('org.liquibase:liquibase-core:3.4.2') {
+		exclude group: 'org.codehaus.plexus'
+	}
+}
+
+if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+	ext.psql = "C:/Program Files (x86)/PostgreSQL/9.5/bin/psql.exe"
+} else {
+	if(System.getenv('PSQL_BIN') == null) {
+		ext.psql = "/usr/bin/psql"
+	} else {
+		ext.psql = System.getenv('PSQL_BIN')
+	}
+}
+
+def runpsql(String sqlFile, String db) {
+	println "Running " + sqlFile
+	exec {
+		ignoreExitValue true
+		environment 'PGPASSWORD', "${dbPwd}"
+		executable psql
+		args '-h', "${dbHost}",
+				'-p', "${dbPort}",
+				'-U', "${dbAdmin}",
+				'-d', "${db}",
+				'-f', "${sqlFile}",
+				'-v', "dbName=${dbName}",
+				'-v', "dbAdmin=${dbAdmin}",
+				'-v', "dbSchema=${dbSchema}",
+				'-v', "liquibaseSchema=${liquibaseSchema}",
+				'-v', "dbAppUserPwd=${dbAppUserPwd}"
+	}
+}
+
+task baseline << {
+	runpsql('database/baseline/dropSchema.sql', "${dbName}")
+	runpsql('database/baseline/dropUser.sql', "${dbName}")
+	runpsql('database/baseline/dropDatabase.sql', "postgres")
+	runpsql('database/baseline/createDatabase.sql', "postgres")
+	runpsql('database/baseline/initializeDatabase.sql', "${dbName}")
+}
+
+task update(dependsOn: configurations.liquibaseConfig, type: JavaExec) {
+	classpath configurations.liquibaseConfig
+	main = 'liquibase.integration.commandline.Main'
+	args '--changeLogFile=database/update/changelog.xml', "--url=jdbc:postgresql://${dbHost}:${dbPort}/${dbName}", 
+		"--username=${dbAdmin}", "--defaultSchemaName=${dbSchema}", "--password=${dbPwd}", "--liquibaseSchemaName=${liquibaseSchema}", 'update'
+	
+	
+}
+
+
